@@ -1,0 +1,71 @@
+{
+  "portfolio": {
+    "SPCX": {"shares": 100},
+    "AMZN": {"shares": 1000}
+  },
+  "plans": [
+    {
+      "id": 1,
+      "created": "2026-08-21T03:48:00+07:00",
+      "status": "WAITING",
+      "symbol": "SPCX",
+      "action": "SELL CALL",
+      "strike": 145,
+      "trigger": "2h Stochastic %K > 80",
+      "confirmation": "Price bounced to $138-142 range",
+      "dte_target": "7-14 days",
+      "exit_plan": "Close at 50% profit or if Stoch drops below 20",
+      "notes": "Prev trade: Sold $140 call exp 8/21, expired worthless (won). SPCX dropped to $134. Waiting for bounce before re-entering.",
+      "context": {
+        "price_at_plan": 134.00,
+        "support": 104.83,
+        "resistance": 150.57,
+        "avg_daily_move_pct": 5.09,
+        "rsi_at_plan": 50.1
+      }
+    },
+    {
+      "id": 2,
+      "created": "2026-08-21T03:52:00+07:00",
+      "status": "WAITING",
+      "symbol": "AMZN",
+      "action": "SELL COVERED CALL",
+      "contracts": 10,
+      "strike": 285,
+      "trigger": "2h Stochastic %K > 80 (recovering from current oversold 8.1)",
+      "confirmation": "Price bounced toward $270-280 range",
+      "dte_target": "14-30 days",
+      "exit_plan": "Close at 50% profit, or roll up/out if tested",
+      "notes": "Own 1000+ shares. IV Rank at 94% = fat premiums. Stoch oversold (8.1), wait for bounce. Sell calls above $285 resistance area.",
+      "context": {
+        "price_at_plan": 260.11,
+        "support": 226.16,
+        "resistance": 287.20,
+        "iv_rank_pct": 94,
+        "adx": 28.3,
+        "rsi_at_plan": 50.7,
+        "stoch_k_at_plan": 8.1,
+        "directional_lean": "+29 bullish"
+      }
+    },
+    {
+      "id": 3,
+      "created": "2026-08-21T03:52:00+07:00",
+      "status": "OPTIONAL",
+      "symbol": "AMZN",
+      "action": "SELL CASH-SECURED PUT",
+      "contracts": "1-2 (if want more shares)",
+      "strike": 240,
+      "trigger": "Can enter now — IV is high, put premiums are rich",
+      "confirmation": "If willing to buy 100-200 more shares at $240",
+      "dte_target": "30-45 days",
+      "exit_plan": "Close at 50% profit or take assignment",
+      "notes": "Alternative play: collect premium and potentially buy AMZN at $240 (8% discount). Only if you want more shares.",
+      "context": {
+        "price_at_plan": 260.11,
+        "support": 226.16,
+        "put_strike_vs_support": "above support, below current price"
+      }
+    }
+  ]
+}

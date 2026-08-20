@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+.venv/
+venv/
+env/
+
+# Data (local scan results - don't commit)
+data/*_latest.json
+data/history/
+
+# Keep trade plans and data dir structure
+!data/
+!data/trade_plans.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Dashboard (separate deploy)
+dashboard/.env
+dashboard/node_modules/
