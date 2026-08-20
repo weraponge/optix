@@ -316,3 +316,92 @@ No auth required. Rate limits apply (aggressive scanning may get 429s). User-Age
 - [ ] Cron job to auto-save daily scans for historical analysis
 - [ ] Position sizing calculator (% of portfolio risk)
 
+---
+
+## Git Guide
+
+### Setup (already done)
+
+```bash
+# SSH key at ~/.ssh/id_ed25519.pub
+# Remote: git@github.com:weraponge/optix.git
+# Branch: main
+```
+
+### Daily Workflow
+
+```bash
+# Check status
+git status
+
+# Stage + commit + push (most common)
+git add -A
+git commit -m "description of changes"
+git push
+
+# Or one-liner:
+git add -A && git commit -m "your message" && git push
+```
+
+### Common Commands
+
+```bash
+# See what changed
+git diff                    # Unstaged changes
+git diff --staged           # Staged changes
+git log --oneline -10       # Last 10 commits
+
+# Undo last commit (keep changes)
+git reset --soft HEAD~1
+
+# Discard all local changes (CAREFUL)
+git checkout -- .
+
+# Pull latest from GitHub
+git pull
+```
+
+### Commit Message Convention
+
+```bash
+git commit -m "feat: add earnings date check"
+git commit -m "fix: SPCX data threshold issue"
+git commit -m "refactor: split scoring into modules"
+git commit -m "docs: update README with new commands"
+```
+
+| Prefix | When to use |
+|--------|-------------|
+| `feat:` | New feature or command |
+| `fix:` | Bug fix |
+| `refactor:` | Code cleanup, no behavior change |
+| `docs:` | README or comments only |
+| `data:` | Trade plan updates |
+
+### What's Tracked vs Ignored
+
+| Tracked (committed) | Ignored |
+|---------------------|---------|
+| `optix.py` | `.venv/` |
+| `README.md` | `data/*_latest.json` |
+| `.gitignore` | `data/history/` |
+| `data/trade_plans.json` | `__pycache__/` |
+
+### Branching (optional, for bigger features)
+
+```bash
+# Create feature branch
+git checkout -b feat/telegram-alerts
+
+# Work on it, commit as usual
+git add -A && git commit -m "feat: telegram bot alerts"
+
+# Push branch
+git push -u origin feat/telegram-alerts
+
+# Merge back to main when done
+git checkout main
+git merge feat/telegram-alerts
+git push
+```
+
