@@ -156,6 +156,61 @@ All market data fetched from Yahoo Finance (free, no API key needed).
 
 ---
 
+## Web App (Streamlit)
+
+Besides the CLI, there is a web UI in `streamlit_app.py` that reuses the same
+scoring engine (`calculate_score` and `sell_options_score` from `optix.py` —
+no logic is duplicated). It provides:
+
+- **Single-symbol scoring** — buy (directional) or sell (premium/theta) with
+  score gauge, component breakdown, and indicators
+- **Watchlist scans** — Tech / ETF / All, sortable table with CSV download
+- **Strategy recommendation** for the sell side (Iron Condor, CSP, etc.)
+
+### Run locally
+
+```bash
+pip install -r requirements.txt
+streamlit run streamlit_app.py
+```
+
+The app opens at http://localhost:8501.
+
+### Deploy on Streamlit Community Cloud
+
+1. Push this repo to GitHub (branch `main`).
+2. Go to [share.streamlit.io](https://share.streamlit.io) and sign in with GitHub.
+3. Click **Create app** → **Deploy a public app from GitHub**.
+4. Set:
+   - **Repository:** `weraponge/optix`
+   - **Branch:** `main`
+   - **Main file path:** `streamlit_app.py`
+5. **Important — open “Advanced settings” and set Python version to `3.12`.**
+   Streamlit Cloud currently defaults to Python 3.14, which has no prebuilt
+   wheels for the pinned `pandas`/`streamlit` versions and will fail the build.
+   Streamlit does **not** read `.python-version` or `runtime.txt` — the version
+   must be selected here.
+6. Click **Deploy**.
+
+To change the Python version of an already-deployed app you must **delete and
+redeploy** it (rebooting keeps the original version).
+
+### Files used by the web app
+
+```
+~/option/
+├── streamlit_app.py       # Streamlit UI (imports optix.py)
+├── requirements.txt       # streamlit==1.37.0, pandas==2.2.2
+└── .streamlit/
+    └── config.toml        # theme + headless server config
+```
+
+> Note: `optix.py` itself is stdlib-only. The web app only adds `streamlit`
+> and `pandas` as dependencies. The `dashboard/` folder is a separate Flask
+> app and is unrelated to this Streamlit deployment.
+
+---
+
 ## Developer Guide
 
 ### Requirements
